@@ -1,7 +1,12 @@
-function WeatherCard({ weather }) {
+function WeatherCard({ weather, error }) {
   return (
     <div className="w-full">
       {
+        error ? (
+          <div className="bg-red-500/20 rounded-2xl p-6 text-white text-center shadow-lg">
+            {error}
+          </div>
+        ) :
         weather ? (
           <div className="bg-white/20 rounded-2xl p-6 text-white text-center shadow-lg">
 
