@@ -1,11 +1,13 @@
-function WetherCard({ weather }) {
+function WeatherCard({ weather }) {
   return (
-    <div className="">
-        if (!weather) {
-        <p>Loading...</p>
-      }else {  
-      <h2 className="">{weather}</h2>
+    <div>
+      {
+        weather 
+        ? <><h2>{weather.temperature}°C</h2><p>{weather.description}</p></>
+        : <p>Loading...</p>
       }
     </div>
-  )
-}export default WetherCard
+  );
+}
+
+export default WeatherCard;
