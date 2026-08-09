@@ -7,9 +7,13 @@ function App() {
   const [city, setCity] = useState("");
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
-  async function handleSearch() {
+  const [loading, setLoading] = useState(false);
+
+  async function handleSearch(e) {
+    e.preventDefault();
     console.log("Searching:", city);
     setError(null);
+    setLoading(true);
     try {
       const data = await getWeather(city);
       const weatherData = {
@@ -24,6 +28,8 @@ function App() {
     } catch (err) {
       setWeather(null);
       setError(`Could not find "${city}"`);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -36,7 +42,7 @@ function App() {
 
         <Search city={city} setCity={setCity} handleSearch={handleSearch} />
 
-        <WeatherCard weather={weather} error={error} />
+        <WeatherCard weather={weather} error={error} loading={loading} />
       </div>
     </div>
   );
