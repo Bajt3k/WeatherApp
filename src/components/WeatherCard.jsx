@@ -23,6 +23,7 @@ function WeatherCard({ weather, error, loading }) {
             </h3>
 
             <p className="text-xl mt-3 capitalize">
+              {weather.icon && <img src={weather.icon} alt={weather.description} className="inline-block w-12 h-12 mr-2" />}
               {weather.description}
             </p>
 

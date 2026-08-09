@@ -8,20 +8,25 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
-
+  const trimmedCity = city.trim();
   async function handleSearch(e) {
     e.preventDefault();
-    console.log("Searching:", city);
     setError(null);
+    if (!trimmedCity) {
+      setError("Please enter a city name");
+      setWeather(null);
+      return;
+    }
     setLoading(true);
     try {
-      const data = await getWeather(city);
+      const data = await getWeather(trimmedCity);
       const weatherData = {
         city: data.name,
         temperature: data.main.temp,
         description: data.weather[0].description,
         humidity: data.main.humidity,
         windSpeed: data.wind.speed,
+        icon: `https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
       };
       setWeather(weatherData);
       console.log("Weather data:", data);
